@@ -3,24 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MyMusicStashWeb
+namespace MyMusicStashWeb.Models
 {
     public class Person
     {
-        public string firstname { get; set; }
-        public string lastname { get; set; }
-        public DateTime birDateTime { get; set; }
-        public int age { get; set; }
-        public string gender { get; set; }
+        public string Firstname;
+        public string Lastname;
+        public DateTime BirDateTime;
+        public int Age;
+        public string Gender;
 
-
-        public Person(string firstname, string lastname, DateTime birDateTime, int personage, string gender)
+        public string Firstname1
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
-            this.birDateTime = birDateTime;
-            this.gender = gender;
-            age = personage;
+            get { return Firstname; }
+            set { Firstname = value; }
+        }
+
+        public string Lastname1
+        {
+            get { return Lastname; }
+            set { Lastname = value; }
+        }
+
+        public DateTime BirDateTime1
+        {
+            get { return BirDateTime; }
+            set { BirDateTime = value; }
+        }
+
+        public int Age1
+        {
+            get { return Age; }
+            set { Age = value; }
+        }
+
+        public string Gender1
+        {
+            get { return Gender; }
+            set { Gender = value; }
+        }
+
+
+        public Person(string firstname, string lastname, DateTime birDateTime, int age, string gender)
+        {
+            this.Firstname = firstname;
+            this.Lastname = lastname;
+            this.BirDateTime = birDateTime;
+            this.Gender = gender;
+           this.Age = age;
         }
 
         public Person()

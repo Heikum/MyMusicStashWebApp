@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using MyMusicStashWeb;
+using MyMusicStashWeb.Interfaces;
 
-namespace MyMusicStashWeb
+namespace MyMusicStashWeb.database_Acces_layer
 {
-    class PostSQLContext
+    class PostsqlContext : IPostSqlContext
     {
         public List<Post> GetAllPosts()
         {
@@ -29,17 +31,114 @@ namespace MyMusicStashWeb
             return collectie;
         }
 
-        public bool insertPost(int AccountID, string Posttekst)
+        public List<Post> GetSpecificPosts(int accountId)
+        {
+            List<Post> collectie = new List<Post>();
+            using (SqlConnection connectie = Database.Connection)
+            {
+                string query = "select * from Post where Account_ID = @id;";
+                SqlCommand cmd = new SqlCommand(query, connectie);
+                cmd.Parameters.AddWithValue("@id", accountId);
+                cmd.ExecuteNonQuery();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        collectie.Add(CreateCollectionFromReader(reader));
+                    }
+                }
+            }
+            return collectie;
+        }
+
+        public bool InsertPost(Post post)
         {
             using (SqlConnection connection = Database.Connection)
             {
-                string query = "insert into Post (Account_ID, Post) values (@AccountID, @Post); ";
+                string query = "insert into Post (Account_ID, Post) values (@AccountID, @Post);";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@AccountID", AccountID);
-                    command.Parameters.AddWithValue("@Post", Posttekst);
-                    command.ExecuteNonQuery();
-                    return true;
+                    command.Parameters.AddWithValue("@AccountID", post.AccountId);
+                    command.Parameters.AddWithValue("@Post", post.Posttext);
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (SqlException)
+                    {
+
+                    }
+                    return false;
+                }
+            }
+        }
+
+        public bool EditPost(Post post)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "update Post set Post.Post = @post where Post_ID = @id;";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@post", post.Posttext);
+                    command.Parameters.AddWithValue("@id", post.PostId);
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (SqlException)
+                    {
+
+                    }
+                    return false;
+                }
+            }
+        }
+
+        public Post GetPost(int postId)
+        {
+            using (SqlConnection connectie = Database.Connection)
+            {
+                string query = "select * from Post where Post_ID = @id;";
+                SqlCommand cmd = new SqlCommand(query, connectie);
+                cmd.Parameters.AddWithValue("@id", postId);
+                cmd.ExecuteNonQuery();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        Post post = (CreateCollectionFromReader(reader));
+                        return post;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public bool DeletePost(Post post)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+
+                using (SqlCommand command = new SqlCommand("DeletePost", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Post_ID", post.PostId);
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (SqlException)
+                    {
+
+                    }
+                    return false;
                 }
             }
         }

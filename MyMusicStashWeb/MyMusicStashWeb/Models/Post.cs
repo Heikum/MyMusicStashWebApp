@@ -7,22 +7,34 @@ namespace MyMusicStashWeb
 {
     public class Post
     {
-        private int postID { get; set; }
-        private int accountID { get; set; }
-        private string posttext { get; set; }
-        private string Username { get; set; }
 
-        public int PostID
+        private int postID;
+        private int accountID;
+        private string posttext;
+        private string Username;
+
+        public int PostId
         {
-            get
-            {
-                return postID;
-            }
+            get { return postID; }
+            set { postID = value; }
+        }
 
-            set
-            {
-                postID = value;
-            }
+        public int AccountId
+        {
+            get { return accountID; }
+            set { accountID = value; }
+        }
+
+        public string Posttext
+        {
+            get { return posttext; }
+            set { posttext = value; }
+        }
+
+        public string Username1
+        {
+            get { return Username; }
+            set { Username = value; }
         }
 
         public Post(int postID, int accountID, string username, string posttext)

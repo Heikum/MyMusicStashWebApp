@@ -145,7 +145,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\IPostContext.cs" />
+    <Compile Include="Interfaces\IPostSqlContext.cs" />
+    <Compile Include="Interfaces\ISongSqlContext.cs" />
+    <Compile Include="Database Acces Layer\AccountSqlContext.cs" />
+    <Compile Include="Interfaces\IAccountSqlContext.cs" />
+    <Compile Include="Interfaces\IPersonSqlContext.cs" />
+    <Compile Include="Interfaces\IReactionSqlContext.cs" />
+    <Compile Include="Database Acces Layer\PersonSqlContext.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -155,16 +161,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Music.cs" />
+    <Compile Include="Models\Song.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Post.cs" />
-    <Compile Include="Database Acces Layer\MusicDatabase.cs" />
-    <Compile Include="Database Acces Layer\PostSQLContext.cs" />
-    <Compile Include="Database Acces Layer\ProfileSQLContext.cs" />
+    <Compile Include="Database Acces Layer\PostSqlContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Reaction.cs" />
-    <Compile Include="Database Acces Layer\ReactionSQLContext.cs" />
-    <Compile Include="Database Acces Layer\SongSQLContext.cs" />
+    <Compile Include="Database Acces Layer\ReactionSqlContext.cs" />
+    <Compile Include="Database Acces Layer\SongSqlContext.cs" />
+    <Compile Include="Repository%27s\AccountRepository.cs" />
+    <Compile Include="Repository%27s\PersonRepository.cs" />
+    <Compile Include="Repository%27s\PostRepository.cs" />
+    <Compile Include="Repository%27s\ReactionRepository.cs" />
+    <Compile Include="Repository%27s\SongRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-darkly.css" />
@@ -211,7 +220,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Repository%27s\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

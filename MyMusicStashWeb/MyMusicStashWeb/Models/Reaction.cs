@@ -3,14 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MyMusicStashWeb
+namespace MyMusicStashWeb.Models
 {
     public class Reaction
     {
-        private int reactionID { get; set; }
-        private int accountID { get; set; }
-        private int postID { get; set; }
-        private string post { get; set; }
+        private int reactionID;
+        private int accountID;
+        private int postID;
+        private string post;
+
+        public int ReactionId
+        {
+            get { return reactionID; }
+            set { reactionID = value; }
+        }
+
+        public int AccountId
+        {
+            get { return accountID; }
+            set { accountID = value; }
+        }
+
+        public int PostId
+        {
+            get { return postID; }
+            set { postID = value; }
+        }
+
+        public string Post
+        {
+            get { return post; }
+            set { post = value; }
+        }
 
         public Reaction(int reactionID, int accountID, int postID, string post)
         {
