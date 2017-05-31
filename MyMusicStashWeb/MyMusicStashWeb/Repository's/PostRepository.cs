@@ -17,22 +17,22 @@ namespace MyMusicStashWeb
 
         public List<Post> GetAllPosts()
         {
-            return this.context.GetAllPosts(); 
+            return context.GetAllPosts(); 
         }
 
         public bool InsertPost(Post post)
         {
-            return this.context.InsertPost(post);
+            return context.InsertPost(post);
         }
 
         public bool DeletePost(Post post)
         {
-            return this.context.DeletePost(post);
+            return context.DeletePost(post);
         }
 
         public bool EditPost(Post post)
         {
-            return this.context.EditPost(post);
+            return context.EditPost(post);
         }
 
 

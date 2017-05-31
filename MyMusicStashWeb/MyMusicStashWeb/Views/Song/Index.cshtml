@@ -1,0 +1,77 @@
+﻿@model IEnumerable<MyMusicStashWeb.Models.Song>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            AccountID
+        </th>
+        <th>
+            Source
+        </th>
+        <th>
+            Song Name
+        </th>
+        <th>
+            Artist Name
+        </th>
+        <th>
+            Album Name
+        </th>
+        <th>
+            Music Date
+        </th>
+        <th>
+            Music Source
+        </th>
+        <th>
+            Music Extension
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MusicType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MusicName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArtistName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AlbumName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MusicDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MusicSource)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MusicExtension)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

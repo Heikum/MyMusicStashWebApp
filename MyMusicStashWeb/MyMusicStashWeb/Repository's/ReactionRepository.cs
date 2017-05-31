@@ -20,27 +20,27 @@ namespace MyMusicStashWeb
 
         public List<Reaction> GetSpecificReactions(int postId)
         {
-            return this.context.GetSpecificReactions(postId);
+            return context.GetSpecificReactions(postId);
         }
 
         public List<Reaction> GetAllReactions()
         {
-            return this.context.GetAllReactions();
+            return context.GetAllReactions();
         }
 
         public bool InsertReaction(Reaction reaction)
         {
-            return this.context.InsertReaction(reaction); 
+            return context.InsertReaction(reaction); 
         }
 
         public bool DeleteReaction(Reaction reaction)
         {
-            return this.context.DeleteReaction(reaction);
+            return context.DeleteReaction(reaction);
         }
 
         public bool EditReaction(Reaction reaction)
         {
-            return this.context.EditReaction(reaction); 
+            return context.EditReaction(reaction); 
         }
 
 

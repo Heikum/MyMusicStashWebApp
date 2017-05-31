@@ -18,24 +18,24 @@ namespace MyMusicStashWeb
 
         public bool Inloggen(string gebruikersnaam, string wachtwoord)
         {
-            return this.context.Inloggen(gebruikersnaam, wachtwoord); 
+            return context.Inloggen(gebruikersnaam, wachtwoord); 
         }
 
         public int GetaccountId(string username)
         {
-            return this.context.GetaccountId(username); 
+            return context.GetaccountId(username); 
         }
 
         public bool Registreer(string username, string password, string firstname, string lastname, string gender,
             int age, DateTime registerDateTime, DateTime birthDate)
         {
-            return this.context.Registreer(username, password, firstname, lastname, gender, age, registerDateTime,
+            return context.Registreer(username, password, firstname, lastname, gender, age, registerDateTime,
                 birthDate);
         }
 
         public bool DeleteAccount(int accountId)
         {
-            return this.context.DeleteAccount(accountId); 
+            return context.DeleteAccount(accountId); 
         }
 
     }

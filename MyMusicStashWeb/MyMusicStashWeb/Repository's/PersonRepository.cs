@@ -19,12 +19,12 @@ namespace MyMusicStashWeb
 
         public Person GetPersonDetails(string username)
         {
-            return this.context.GetPersonDetails(username); 
+            return context.GetPersonDetails(username); 
         }
 
         public bool UpdateDetails(Account account, Person person)
         {
-            return this.context.UpdateDetails(account, person);
+            return context.UpdateDetails(account, person);
         }
 
     }

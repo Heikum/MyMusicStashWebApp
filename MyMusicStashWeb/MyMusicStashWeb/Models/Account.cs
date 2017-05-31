@@ -7,6 +7,12 @@ namespace MyMusicStashWeb.Models
 {
     public class Account
     {
+        public int AccountId
+        {
+            get { return accountId; }
+            set { accountId = value; }
+        }
+
         public string Username1
         {
             get { return Username; }
@@ -21,11 +27,19 @@ namespace MyMusicStashWeb.Models
 
         private string Username;
         private string Password;
+        private int accountId; 
 
         public Account(string uname, string pword)
         {
             this.Username = uname;
             this.Password = pword;
+        }
+
+        public Account(string uname, string pword, int id)
+        {
+            this.Username = uname;
+            this.Password = pword;
+            this.accountId = id; 
         }
 
         public override string ToString()

@@ -18,32 +18,32 @@ namespace MyMusicStashWeb.Repository_s
 
         public bool AddSong(Song song, int accountId)
         {
-            return this.context.AddSong(song, accountId);
+            return context.AddSong(song, accountId);
         }
 
         public bool AddNewSongProcedure(int accountId, Song song)
         {
-            return this.context.AddNewSongProcedure(accountId, song); 
+            return context.AddNewSongProcedure(accountId, song); 
         }
 
         public bool EditSong(int musicId, Song song)
         {
-            return this.context.EditSong(musicId, song); 
+            return context.EditSong(musicId, song); 
         }
 
         public List<Song> GetAllSongsFromUser(int accountId)
         {
-            return this.context.GetAllSongsFromUser(accountId); 
+            return context.GetAllSongsFromUser(accountId); 
         }
 
         public List<Song> GetAllSongs()
         {
-            return this.context.GetAllSongs();
+            return context.GetAllSongs();
         }
 
         public bool DeleteSong(int musicId)
         {
-            return this.context.DeleteSong(musicId); 
+            return context.DeleteSong(musicId); 
         }
 
     }
