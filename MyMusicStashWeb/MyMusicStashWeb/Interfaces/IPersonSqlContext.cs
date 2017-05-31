@@ -7,8 +7,7 @@ namespace MyMusicStashWeb.Interfaces
     {
         Person GetPersonDetails(string username);
 
-        bool UpdateDetails(string username, string password, string firstname, string lastname, string gender,
-            int age, DateTime birthDate);
+        bool UpdateDetails(Account account, Person person);
 
         int GetaccountId(string username);
     }

@@ -29,12 +29,11 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                 {
                     while (reader.Read())
                     {
-                        foundperson.Firstname = reader["Name"].ToString();
-                        Console.WriteLine(foundperson.Firstname);
-                        foundperson.Lastname = reader["Lastname"].ToString();
-                        foundperson.Age = Convert.ToInt32(reader["Age"]);
-                        foundperson.BirDateTime = Convert.ToDateTime(reader["Birthdate"]);
-                        foundperson.Gender = reader["Gender"].ToString();
+                        foundperson.Firstname1 = reader["Name"].ToString();
+                        foundperson.Lastname1 = reader["Lastname"].ToString();
+                        foundperson.Age1 = Convert.ToInt32(reader["Age"]);
+                        foundperson.BirDateTime1 = Convert.ToDateTime(reader["Birthdate"]);
+                        foundperson.Gender1 = reader["Gender"].ToString();
 
                     }
                 }
@@ -43,10 +42,9 @@ namespace MyMusicStashWeb.Database_Acces_Layer
         }
 
 
-        public bool UpdateDetails(string username, string password, string firstname, string lastname, string gender,
-           int age, DateTime birthDate)
+        public bool UpdateDetails(Account account, Person person)
         {
-            accountID = GetaccountId(username);
+            accountID = GetaccountId(account.Username1);
             using (SqlConnection connectie = Database.Connection)
             {
                 SqlCommand cmd =
@@ -56,8 +54,8 @@ namespace MyMusicStashWeb.Database_Acces_Layer
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connectie;
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@username", account.Username1);
+                cmd.Parameters.AddWithValue("@password", account.Password1);
 
                 cmd.Parameters.Add("@id", SqlDbType.Int);
                 cmd.Parameters["@id"].Value = accountID;
@@ -69,11 +67,11 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                         connectie);
                 cmd1.CommandType = CommandType.Text;
                 cmd1.Connection = connectie;
-                cmd1.Parameters.AddWithValue("@voornaam", firstname);
-                cmd1.Parameters.AddWithValue("@achternaam", lastname);
-                cmd1.Parameters.AddWithValue("@geslacht", gender);
-                cmd1.Parameters.AddWithValue("@age", age);
-                cmd1.Parameters.AddWithValue("@birthdate", birthDate);
+                cmd1.Parameters.AddWithValue("@voornaam", person.Firstname1);
+                cmd1.Parameters.AddWithValue("@achternaam", person.Lastname1);
+                cmd1.Parameters.AddWithValue("@geslacht", person.Gender1);
+                cmd1.Parameters.AddWithValue("@age", person.Age1);
+                cmd1.Parameters.AddWithValue("@birthdate", person.BirDateTime1);
                 cmd1.Parameters.Add("@id2", SqlDbType.Int);
                 cmd1.Parameters["@id2"].Value = accountID;
                 cmd1.ExecuteNonQuery();

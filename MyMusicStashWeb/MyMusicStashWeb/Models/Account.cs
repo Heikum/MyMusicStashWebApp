@@ -7,8 +7,20 @@ namespace MyMusicStashWeb.Models
 {
     public class Account
     {
-        private string Username { get; set; }
-        private string Password { get ; set; }
+        public string Username1
+        {
+            get { return Username; }
+            set { Username = value; }
+        }
+
+        public string Password1
+        {
+            get { return Password; }
+            set { Password = value; }
+        }
+
+        private string Username;
+        private string Password;
 
         public Account(string uname, string pword)
         {

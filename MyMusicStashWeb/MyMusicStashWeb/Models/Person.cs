@@ -7,11 +7,11 @@ namespace MyMusicStashWeb.Models
 {
     public class Person
     {
-        public string Firstname;
-        public string Lastname;
-        public DateTime BirDateTime;
-        public int Age;
-        public string Gender;
+        private string Firstname;
+        private string Lastname;
+        private DateTime BirDateTime;
+        private int Age;
+        private string Gender;
 
         public string Firstname1
         {
