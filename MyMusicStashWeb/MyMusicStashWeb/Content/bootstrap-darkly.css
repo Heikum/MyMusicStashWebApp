@@ -2750,6 +2750,7 @@ select[multiple].input-sm {
   font-size: 18px;
   line-height: 1.3333333;
   border-radius: 6px;
+    margin: 0 auto;
 }
 select.input-lg {
   height: 54px;

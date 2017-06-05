@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace MyMusicStashWeb
+namespace MyMusicStashWeb.Database_Acces_Layer
 {
     public class Database
     {
@@ -14,7 +14,14 @@ namespace MyMusicStashWeb
             get
             {
                 SqlConnection connection = new SqlConnection(connectionString);
-                connection.Open();
+                try
+                {
+                    connection.Open();
+                }
+                catch (Exception)
+                {
+                    connection.Close();
+                }
                 return connection;
             }
         }

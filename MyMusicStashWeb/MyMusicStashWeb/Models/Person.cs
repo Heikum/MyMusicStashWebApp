@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -13,30 +14,34 @@ namespace MyMusicStashWeb.Models
         private int Age;
         private string Gender;
 
+
+        [DisplayName("Firstname")]
         public string Firstname1
         {
             get { return Firstname; }
             set { Firstname = value; }
         }
 
+        [DisplayName("Lastname")]
         public string Lastname1
         {
             get { return Lastname; }
             set { Lastname = value; }
         }
 
+        [DisplayName("Birthdate")]
         public DateTime BirDateTime1
         {
             get { return BirDateTime; }
             set { BirDateTime = value; }
         }
-
+        [DisplayName("Age")]
         public int Age1
         {
             get { return Age; }
             set { Age = value; }
         }
-
+        [DisplayName("Gender")]
         public string Gender1
         {
             get { return Gender; }

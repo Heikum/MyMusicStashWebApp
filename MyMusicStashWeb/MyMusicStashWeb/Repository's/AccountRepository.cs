@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MyMusicStashWeb.Database_Acces_Layer;
 using MyMusicStashWeb.Interfaces;
+using MyMusicStashWeb.Models;
 
 namespace MyMusicStashWeb
 {
@@ -16,9 +17,9 @@ namespace MyMusicStashWeb
             this.context = context;
         }
 
-        public bool Inloggen(string gebruikersnaam, string wachtwoord)
+        public bool Login(Account account)
         {
-            return context.Inloggen(gebruikersnaam, wachtwoord); 
+            return context.Login(account); 
         }
 
         public int GetaccountId(string username)
@@ -26,11 +27,9 @@ namespace MyMusicStashWeb
             return context.GetaccountId(username); 
         }
 
-        public bool Registreer(string username, string password, string firstname, string lastname, string gender,
-            int age, DateTime registerDateTime, DateTime birthDate)
+        public bool Register(Account account)
         {
-            return context.Registreer(username, password, firstname, lastname, gender, age, registerDateTime,
-                birthDate);
+            return context.Register(account);
         }
 
         public bool DeleteAccount(int accountId)

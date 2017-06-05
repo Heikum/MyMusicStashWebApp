@@ -1,14 +1,14 @@
 using System;
+using MyMusicStashWeb.Models;
 
 namespace MyMusicStashWeb.Interfaces
 {
     public interface IAccountSqlContext
     {
-        bool Inloggen(string gebruikersnaam, string wachtwoord);
+        bool Login(Account account);
         int GetaccountId(string username);
 
-        bool Registreer(string username, string password, string firstname, string lastname, string gender,
-            int age, DateTime registerDateTime, DateTime birthDate);
+        bool Register(Account account);
 
         bool DeleteAccount(int accountId);
     }

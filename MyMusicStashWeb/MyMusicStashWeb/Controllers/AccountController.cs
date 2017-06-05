@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using MyMusicStashWeb.Database_Acces_Layer;
@@ -11,7 +12,7 @@ namespace MyMusicStashWeb.Controllers
 {
     public class AccountController : Controller
     {
-        public AccountRepository repo = new AccountRepository(new AccountSqlContext());
+         AccountRepository repo = new AccountRepository(new AccountSqlContext());
         // GET: Account
         public ActionResult Index()
         {
@@ -30,9 +31,11 @@ namespace MyMusicStashWeb.Controllers
 
 
         [HttpPost]
-        public ActionResult Login(string username, string password)
+        public ActionResult Login(FormCollection collection)
         {
-            if (repo.Inloggen(username, password))
+            Account account = new Account(collection["username"], collection["password"]);
+            Session["Username"] = account.Username1;
+            if (repo.Login(account))
             {
                 return RedirectToAction("Index", "Home");
 
@@ -44,19 +47,35 @@ namespace MyMusicStashWeb.Controllers
            
         }
 
-        [HttpPost]
-        public ActionResult Register(Account account, Person person)
+        public ActionResult Create()
         {
-            if (repo.Registreer(account.Username1, account.Password1, person.Firstname1, person.Lastname1,
-                person.Gender1, person.Age1, DateTime.Now, person.BirDateTime1))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                return View();
-            }
+            return View();
         }
 
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            var birthdate = Convert.ToDateTime(collection["birthdate"]);
+            var today = DateTime.Now;
+            var age = today.Year - birthdate.Year;
+            Person person = new Person(collection["firstname"], collection["lastname"], Convert.ToDateTime(collection["birthdate"]), age, collection["gender"]);
+            Account account = new Account(collection["username"], collection["password"], person);
+            try
+            {
+                // TODO: Add insert logic here
+                repo.Register(account); 
+                //Models.Email mail = new Models.Email("Activeer uw account", "inhoud", "dhrlaaboudi@gmail.com");
+                //EmailLogic.SendEmail(mail);
+                //EmailLogic.SendEmailNew(mail, account.Activatiehash, account.Voornaam);
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch
+            {
+                throw;
+                //return View();
+            }
+        }
     }
-}
+
+    }
