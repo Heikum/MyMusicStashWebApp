@@ -1,4 +1,6 @@
 ﻿@using System.Web.UI.WebControls
+@using MyMusicStashWeb.Controllers
+@using MyMusicStashWeb.Models
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,17 +26,18 @@
                     @if (Session["Username"] != null)
                     {
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("All Songs", "Index", "Song")</li>
+                        <li>@Html.ActionLink("My Songs", "Index", "Song")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         <li class="navbar-right"> <a href="#">@Session["Username"]</a></li>
+                        <li class="navbar-right"> <a href="#">@Session["UserID"]</a></li>
+                        <li><a href='@Url.Action("LogOut", "Account")'>Log Out</a></li>
                     }
                     else
                     {
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("Login", "Login", "Account")</li>
                         <li>@Html.ActionLink("Register", "Create", "Account")</li>
-                        <li>@Html.ActionLink("All Songs", "Index", "Song")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     }

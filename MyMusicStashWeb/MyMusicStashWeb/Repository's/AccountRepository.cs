@@ -32,6 +32,11 @@ namespace MyMusicStashWeb
             return context.Register(account);
         }
 
+        public bool InserPerson(Account account)
+        {
+            return context.InsertPerson(account);
+        }
+
         public bool DeleteAccount(int accountId)
         {
             return context.DeleteAccount(accountId); 

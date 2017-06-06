@@ -166,7 +166,7 @@
     <Compile Include="Models\Song.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Post.cs" />
-    <Compile Include="Database Acces Layer\PostSqlContext.cs" />
+    <Compile Include="Interfaces\PostSqlContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Reaction.cs" />
     <Compile Include="Database Acces Layer\ReactionSqlContext.cs" />
@@ -221,6 +221,9 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Song\Index.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Song\Delete.cshtml" />
+    <Content Include="Views\Song\Edit.cshtml" />
+    <Content Include="Views\Song\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

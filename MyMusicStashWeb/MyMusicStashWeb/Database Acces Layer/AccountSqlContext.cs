@@ -65,8 +65,16 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                 cmd.Parameters.AddWithValue("@password", account.Password1);
                 cmd.Parameters.AddWithValue("@date", DateTime.Now);
                 cmd.ExecuteNonQuery();
-                accountID = GetaccountId(account.Username1);
+                InsertPerson(account);
+                return true;
+            }
+        }
 
+        public bool InsertPerson(Account account)
+        {
+            using (SqlConnection connectie = Database.Connection)
+            {
+                accountID = GetaccountId(account.Username1);
                 SqlCommand cmd1 =
                     new SqlCommand(
                         @"SET IDENTITY_INSERT Person ON INSERT INTO[dbo].[Person] ([Person_ID], [Name], [Lastname], [Gender], [Age], [Birthdate]) VALUES (@id, @voornaam, @achternaam, @geslacht, @age, @birthdate)",

@@ -18,7 +18,7 @@ namespace MyMusicStashWeb.Controllers
         public ActionResult Index()
         {
             List<Song> collectie = new List<Song>();
-            collectie = repo.GetAllSongs();
+            collectie = repo.GetAllSongsFromUser(Convert.ToInt32(Session["UserID"]));
             return View(collectie);
         }
 
@@ -38,10 +38,13 @@ namespace MyMusicStashWeb.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
+            Song song = new Song(Convert.ToInt32(Session["UserID"]), collection["MusicType"], collection["MusicName"],
+                collection["ArtistName"], collection["AlbumName"], Convert.ToDateTime(collection["MusicDate"]),
+                collection["MusicSource"], collection["MusicExtension"]);
             try
             {
                 // TODO: Add insert logic here
-
+                repo.AddSong(song);
                 return RedirectToAction("Index");
             }
             catch
@@ -62,7 +65,11 @@ namespace MyMusicStashWeb.Controllers
         {
             try
             {
+                Song song = new Song(Convert.ToInt32(Session["UserID"]), collection["music_type"], collection["music_name"],
+                    collection["artist_name"], collection["album_name"], Convert.ToDateTime(collection["music_date"]),
+                    collection["music_source"], collection["music_extension"]);
                 // TODO: Add update logic here
+                repo.EditSong(id, song);
 
                 return RedirectToAction("Index");
             }
@@ -84,7 +91,7 @@ namespace MyMusicStashWeb.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                repo.DeleteSong(id);
 
                 return RedirectToAction("Index");
             }

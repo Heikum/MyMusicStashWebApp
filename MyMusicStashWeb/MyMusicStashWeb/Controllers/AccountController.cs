@@ -35,6 +35,7 @@ namespace MyMusicStashWeb.Controllers
         {
             Account account = new Account(collection["username"], collection["password"]);
             Session["Username"] = account.Username1;
+            Session["UserID"] = repo.GetaccountId(account.Username1); 
             if (repo.Login(account))
             {
                 return RedirectToAction("Index", "Home");
@@ -45,6 +46,23 @@ namespace MyMusicStashWeb.Controllers
                 return View();
             }
            
+        }
+        //zorgt voor het uitloggen van de gebruiker door zowel de sessie te clearen als de cookies te verwijderen indien aanwezig
+        [AllowAnonymous]
+        public ActionResult LogOut()
+        {
+            Response.AddHeader("Cache-Control", "no-cache, no-store,must-revalidate");
+            Response.AddHeader("Pragma", "no-cache");
+            Response.AddHeader("Expires", "0");
+            Session.Abandon();
+
+            Session.Clear();
+            Response.Cookies.Clear();
+            Session.RemoveAll();
+
+            Session["Username"] = null;
+            Session["UserID"] = null;
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Create()

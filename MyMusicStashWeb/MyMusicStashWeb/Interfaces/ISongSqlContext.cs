@@ -6,8 +6,8 @@ namespace MyMusicStashWeb.Interfaces
 {
     public interface ISongSqlContext
     {
-        bool AddSong(Song song, int accountId);
-        bool AddNewSongProcedure(int accountId, Song song);
+        bool AddSong(Song song);
+        bool AddNewSongProcedure(Song song);
         bool EditSong(int musicId, Song song);
         List<Song> GetAllSongsFromUser(int accountId);
         List<Song> GetAllSongs();

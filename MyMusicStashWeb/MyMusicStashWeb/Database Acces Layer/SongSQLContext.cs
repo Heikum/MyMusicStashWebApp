@@ -13,7 +13,7 @@ namespace MyMusicStashWeb.database_Acces_layer
 {
     class SongSQLContext : ISongSqlContext
     {
-        public bool AddSong(Song song, int accountId)
+        public bool AddSong(Song song)
         {
             using (SqlConnection connection = Database.Connection)
             {
@@ -21,7 +21,7 @@ namespace MyMusicStashWeb.database_Acces_layer
                     "VALUES (@Account_ID, @Music_type, @Music_name, @Artist_name, @Album_name, @Music_date, @Music_source, @Music_extension)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Account_ID", accountId);
+                    command.Parameters.AddWithValue("@Account_ID", song.AccountId);
                     command.Parameters.AddWithValue("@Music_type", song.MusicType);
                     command.Parameters.AddWithValue("@Music_name", song.MusicName);
                     command.Parameters.AddWithValue("@Artist_name", song.ArtistName);
@@ -44,21 +44,21 @@ namespace MyMusicStashWeb.database_Acces_layer
             }
         }
         //strored procedure
-        public bool AddNewSongProcedure(int accountId, Song song)
+        public bool AddNewSongProcedure(Song song)
         {
             using (SqlConnection connection = Database.Connection)
             {
                 string query = "EXECUTE InsertNewSong @Account_ID = @Account_ID1, @Music_type = @Music_type1, @Music_name = @Music_name1, @Artist_name = @Artist_name1, @Album_name = @Album_name1, @Music_date = @Music_date1, @Music_source = @Music_source1, @Music_extension = @Music_extension1";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Account_ID", accountId);
-                    command.Parameters.AddWithValue("@Music_type", song.MusicType);
-                    command.Parameters.AddWithValue("@Music_name", song.MusicName);
-                    command.Parameters.AddWithValue("@Artist_name", song.ArtistName);
-                    command.Parameters.AddWithValue("@Album_name", song.AlbumName);
-                    command.Parameters.AddWithValue("@Music_date", song.MusicDate);
-                    command.Parameters.AddWithValue("@Music_source", song.MusicSource);
-                    command.Parameters.AddWithValue("@Music_extension", song.MusicExtension);
+                    command.Parameters.AddWithValue("@Account_ID1", song.AccountId);
+                    command.Parameters.AddWithValue("@Music_type1", song.MusicType);
+                    command.Parameters.AddWithValue("@Music_name1", song.MusicName);
+                    command.Parameters.AddWithValue("@Artist_name1", song.ArtistName);
+                    command.Parameters.AddWithValue("@Album_name1", song.AlbumName);
+                    command.Parameters.AddWithValue("@Music_date1", song.MusicDate);
+                    command.Parameters.AddWithValue("@Music_source1", song.MusicSource);
+                    command.Parameters.AddWithValue("@Music_extension1", song.MusicExtension);
 
                     try
                     {
@@ -111,6 +111,7 @@ namespace MyMusicStashWeb.database_Acces_layer
             {
                 string query = "select * from Music_collection where Account_ID = @id;";
                 SqlCommand cmd = new SqlCommand(query, connectie);
+                cmd.Parameters.AddWithValue("@id", accountId);
                 cmd.ExecuteNonQuery();
 
                 using (SqlDataReader reader = cmd.ExecuteReader())

@@ -11,5 +11,6 @@ namespace MyMusicStashWeb.Interfaces
         bool Register(Account account);
 
         bool DeleteAccount(int accountId);
+        bool InsertPerson(Account acount); 
     }
 }

@@ -16,14 +16,14 @@ namespace MyMusicStashWeb.Repository_s
             this.context = context;
         }
 
-        public bool AddSong(Song song, int accountId)
+        public bool AddSong(Song song)
         {
-            return context.AddSong(song, accountId);
+            return context.AddSong(song);
         }
 
-        public bool AddNewSongProcedure(int accountId, Song song)
+        public bool AddNewSongProcedure(Song song)
         {
-            return context.AddNewSongProcedure(accountId, song); 
+            return context.AddNewSongProcedure(song); 
         }
 
         public bool EditSong(int musicId, Song song)
