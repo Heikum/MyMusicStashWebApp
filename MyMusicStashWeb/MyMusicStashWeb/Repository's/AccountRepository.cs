@@ -17,6 +17,11 @@ namespace MyMusicStashWeb
             this.context = context;
         }
 
+        public bool EditAccount(Account account)
+        {
+            return context.EditAccount(account); 
+        }
+
         public bool Login(Account account)
         {
             return context.Login(account); 
@@ -25,6 +30,11 @@ namespace MyMusicStashWeb
         public int GetaccountId(string username)
         {
             return context.GetaccountId(username); 
+        }
+
+        public Account GetById(int id)
+        {
+            return context.GetById(id);
         }
 
         public bool Register(Account account)

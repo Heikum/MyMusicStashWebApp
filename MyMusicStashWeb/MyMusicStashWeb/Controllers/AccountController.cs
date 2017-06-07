@@ -16,7 +16,8 @@ namespace MyMusicStashWeb.Controllers
         // GET: Account
         public ActionResult Index()
         {
-            return View();
+            Account account = repo.GetById(Convert.ToInt32(Session["UserID"]));
+            return View(account);
         }
 
         public ActionResult Login()
@@ -65,6 +66,29 @@ namespace MyMusicStashWeb.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Edit(int id)
+        {
+            Account account = repo.GetById(id);
+            return View(account);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(FormCollection collection)
+        {
+            Account account = new Account(collection["Username1"], collection["Password1"], Convert.ToInt32(Session["UserID"]), collection["Email1"]);
+            try
+            {
+                repo.EditAccount(account);
+
+                return RedirectToAction("Index", "Account");
+            }
+            catch
+            {
+                throw;
+                //return View();
+            }
+        }
+
         public ActionResult Create()
         {
             return View();
@@ -77,7 +101,7 @@ namespace MyMusicStashWeb.Controllers
             var today = DateTime.Now;
             var age = today.Year - birthdate.Year;
             Person person = new Person(collection["firstname"], collection["lastname"], Convert.ToDateTime(collection["birthdate"]), age, collection["gender"]);
-            Account account = new Account(collection["username"], collection["password"], person);
+            Account account = new Account(collection["username"], collection["password"], collection["Email"], person);
             try
             {
                 // TODO: Add insert logic here

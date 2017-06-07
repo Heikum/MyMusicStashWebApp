@@ -81,14 +81,14 @@ namespace MyMusicStashWeb.database_Acces_layer
                 string query = "update Music_collection set Music_type = @musictype, Music_name = @musicname, Artist_name = @artistname, Album_name = @albumname, Music_date = @musicdate, Music_source = @musicsource, Music_extension = @musicextension where Music_ID = @id;";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@music_ID", musicId);
-                    command.Parameters.AddWithValue("@Music_type", song.MusicType);
-                    command.Parameters.AddWithValue("@Music_name", song.MusicName);
-                    command.Parameters.AddWithValue("@Artist_name", song.ArtistName);
-                    command.Parameters.AddWithValue("@Album_name", song.AlbumName);
-                    command.Parameters.AddWithValue("@Music_date", song.MusicDate);
-                    command.Parameters.AddWithValue("@Music_source", song.MusicSource);
-                    command.Parameters.AddWithValue("@Music_extension", song.MusicExtension);
+                    command.Parameters.AddWithValue("@id", musicId);
+                    command.Parameters.AddWithValue("@musictype", song.MusicType);
+                    command.Parameters.AddWithValue("@Musicname", song.MusicName);
+                    command.Parameters.AddWithValue("@Artistname", song.ArtistName);
+                    command.Parameters.AddWithValue("@Albumname", song.AlbumName);
+                    command.Parameters.AddWithValue("@Musicdate", song.MusicDate);
+                    command.Parameters.AddWithValue("@Musicsource", song.MusicSource);
+                    command.Parameters.AddWithValue("@Musicextension", song.MusicExtension);
 
                     try
                     {
@@ -118,11 +118,32 @@ namespace MyMusicStashWeb.database_Acces_layer
                 {
                     while (reader.Read())
                     {
-                        collectie.Add(CreateCollectionFromReader(reader));
+                        collectie.Add(CreateSongFromReader(reader));
                     }
                 }
             }
             return collectie;
+        }
+
+        public Song GetById(int musicId)
+        {
+            using (SqlConnection connectie = Database.Connection)
+            {
+                string query = "select * from Music_collection where Music_ID = @id;";
+                SqlCommand cmd = new SqlCommand(query, connectie);
+                cmd.Parameters.AddWithValue("@id", musicId);
+                cmd.ExecuteNonQuery();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Song song = CreateSongFromReader(reader);
+                        return song; 
+                    }
+                }
+            }
+            return null;
         }
 
         public List<Song> GetAllSongs()
@@ -138,14 +159,14 @@ namespace MyMusicStashWeb.database_Acces_layer
                 {
                     while (reader.Read())
                     {
-                        collectie.Add(CreateCollectionFromReader(reader));
+                        collectie.Add(CreateSongFromReader(reader));
                     }
                 }
             }
             return collectie;
         }
-
-        public Song CreateCollectionFromReader(SqlDataReader reader)
+        //Maakt een song class aan en returned deze
+        public Song CreateSongFromReader(SqlDataReader reader)
         {
             return new Song(
                 Convert.ToInt32(reader["Music_ID"]),

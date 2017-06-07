@@ -93,6 +93,46 @@ namespace MyMusicStashWeb.Database_Acces_Layer
             }
         }
 
+        public Account GetById(int id)
+        {
+            using (SqlConnection connectie = Database.Connection)
+            {
+                string query = "select * from Account where Account_ID = @id;";
+                SqlCommand cmd = new SqlCommand(query, connectie);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Account account = CreateAccountFromReader(reader);
+                        return account;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public bool EditAccount(Account account)
+        {
+            using (SqlConnection connectie = Database.Connection)
+            {
+                SqlCommand cmd1 =
+                    new SqlCommand(
+                        @"update Account set Password = @Password, Email = @Email where  Account_ID = @id",
+                        connectie);
+                cmd1.CommandType = CommandType.Text;
+                cmd1.Connection = connectie;
+                cmd1.Parameters.AddWithValue("@id", account.AccountId);
+                cmd1.Parameters.AddWithValue("@Password", account.Password1);
+                cmd1.Parameters.AddWithValue("@Email", account.Email1);
+                cmd1.ExecuteNonQuery();
+                return true;
+            }
+        }
+
+
         public bool DeleteAccount(int accountId)
         {
             using (SqlConnection connectie = Database.Connection)
@@ -100,6 +140,16 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                 return true;
             }
         }
+
+        public Account CreateAccountFromReader(SqlDataReader reader)
+        {
+            return new Account(
+                Convert.ToString(reader["Username"]),
+                Convert.ToString(reader["Password"]),
+                Convert.ToInt32(reader["Account_ID"]),
+                Convert.ToString(reader["Email"]));
+        }
+
 
     }
 }

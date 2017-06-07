@@ -17,14 +17,14 @@ namespace MyMusicStashWeb
             this.context = context;
         }
 
-        public Person GetPersonDetails(string username)
+        public Person GetPersonDetails(int id)
         {
-            return context.GetPersonDetails(username); 
+            return context.GetPersonDetails(id); 
         }
 
-        public bool UpdateDetails(Account account, Person person)
+        public bool UpdateDetails(int id, Person person)
         {
-            return context.UpdateDetails(account, person);
+            return context.UpdateDetails(id, person);
         }
 
     }

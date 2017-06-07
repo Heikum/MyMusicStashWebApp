@@ -5,10 +5,10 @@ namespace MyMusicStashWeb.Interfaces
 {
     public interface IPersonSqlContext
     {
-        Person GetPersonDetails(string username);
 
-        bool UpdateDetails(Account account, Person person);
+        bool UpdateDetails(int id, Person person);
 
-        int GetaccountId(string username);
+        //int GetaccountId(string username);
+        Person GetPersonDetails(int id);
     }
 }

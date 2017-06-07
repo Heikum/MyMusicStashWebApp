@@ -16,6 +16,10 @@ namespace MyMusicStashWeb.Repository_s
             this.context = context;
         }
 
+        public Song GetById(int id)
+        {
+            return context.GetById(id); 
+        }
         public bool AddSong(Song song)
         {
             return context.AddSong(song);

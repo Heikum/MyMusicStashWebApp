@@ -6,45 +6,44 @@ using System.Web.Mvc;
 using MyMusicStashWeb.database_Acces_layer;
 using MyMusicStashWeb.Interfaces;
 using MyMusicStashWeb.Models;
-using MyMusicStashWeb.Repository_s;
 
 namespace MyMusicStashWeb.Controllers
 {
-    public class SongController : Controller
+    public class PostController : Controller
     {
-        SongRepository repo = new SongRepository(new SongSQLContext());
+        PostRepository repopost = new PostRepository(new PostsqlContext());
+        ReactionRepository reporeaction = new ReactionRepository(new ReactionSqlContext());
+        // GET: Post
 
-        // GET: Song
         public ActionResult Index()
         {
-            List<Song> collectie = new List<Song>();
-            collectie = repo.GetAllSongsFromUser(Convert.ToInt32(Session["UserID"]));
-            return View(collectie);
+            List<Post> posts = new List<Post>();
+            posts = repopost.GetAllPosts();
+            return View(posts);
         }
 
-        // GET: Song/Details/5
+        // GET: Post/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            List<Reaction> listreaction = reporeaction.GetSpecificReactions(id); 
+            return View(listreaction);
         }
 
-        // GET: Song/Create
+        // GET: Post/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Song/Create
+        // POST: Post/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            Song song = new Song(Convert.ToInt32(Session["UserID"]), collection["MusicType"], collection["MusicName"],
-                collection["ArtistName"], collection["AlbumName"], Convert.ToDateTime(collection["MusicDate"]),
-                collection["MusicSource"], collection["MusicExtension"]);
             try
             {
+                Post post = new Post(Convert.ToInt32(Session["UserID"]), collection["Posttext"]);
                 // TODO: Add insert logic here
-                repo.AddSong(song);
+                repopost.InsertPost(post);
                 return RedirectToAction("Index");
             }
             catch
@@ -53,24 +52,19 @@ namespace MyMusicStashWeb.Controllers
             }
         }
 
-        // GET: Song/Edit/5
+        // GET: Post/Edit/5
         public ActionResult Edit(int id)
         {
-            Song song = repo.GetById(id);
-            return View(song);
+            return View();
         }
 
-        // POST: Song/Edit/5
+        // POST: Post/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
             {
-                Song song = new Song(Convert.ToInt32(Session["UserID"]), collection["MusicType"], collection["MusicName"],
-                    collection["ArtistName"], collection["AlbumName"], Convert.ToDateTime(collection["MusicDate"]),
-                    collection["MusicSource"], collection["MusicExtension"]);
                 // TODO: Add update logic here
-                repo.EditSong(id, song);
 
                 return RedirectToAction("Index");
             }
@@ -80,19 +74,19 @@ namespace MyMusicStashWeb.Controllers
             }
         }
 
-        // GET: Song/Delete/5
+        // GET: Post/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Song/Delete/5
+        // POST: Post/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                repo.DeleteSong(id);
+                // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
             }

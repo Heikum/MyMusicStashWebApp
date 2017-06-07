@@ -12,6 +12,14 @@ namespace MyMusicStashWeb.Models
         private string Username;
         private string Password;
         private int accountId;
+        private string Email;
+
+        [DisplayName("Email")]
+        public string Email1
+        {
+            get { return Email; }
+            set { Email = value; }
+        }
 
         public Person Person
         {
@@ -47,18 +55,20 @@ namespace MyMusicStashWeb.Models
             this.Password = pword;
         }
 
-        public Account(string uname, string pword, Person person)
+        public Account(string uname, string pword, string email, Person person)
         {
             this.Username = uname;
             this.Password = pword;
-            this.person = person; 
+            this.person = person;
+            this.Email = email;
         }
 
-        public Account(string uname, string pword, int id)
+        public Account(string uname, string pword, int id, string email)
         {
             this.Username = uname;
             this.Password = pword;
-            this.accountId = id; 
+            this.accountId = id;
+            this.Email = email;
         }
 
         public override string ToString()

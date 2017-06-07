@@ -44,6 +44,11 @@ namespace MyMusicStashWeb
             this.Username = username;
             this.posttext = posttext;
         }
+        public Post(int accountID, string posttext)
+        {
+            this.accountID = accountID;
+            this.posttext = posttext;
+        }
 
         public override string ToString()
         {
