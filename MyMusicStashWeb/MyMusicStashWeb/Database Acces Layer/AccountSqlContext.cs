@@ -35,16 +35,70 @@ namespace MyMusicStashWeb.Database_Acces_Layer
             }
 
         }
+
+        public bool CheckHash(int ID, string hash)
+        {
+            using (SqlConnection connectie = Database.Connection)
+            {
+                SqlCommand cmd1 = new SqlCommand(@"select ActivationHash from Account where Account_ID = @id;",
+                    connectie);
+                cmd1.Parameters.AddWithValue("@id", ID);
+                string foundhash = (string)cmd1.ExecuteScalar();
+                if (foundhash == hash)
+                {
+                    ActivateAccount(ID); 
+                    return true;
+                }
+                else
+                {
+                    return false; 
+                }
+            } 
+        }
+
+        public bool GetActivationStatus(int ID)
+        {
+            using (SqlConnection connectie = Database.Connection)
+            {
+                SqlCommand cmd1 = new SqlCommand(@"select Activated from Account where Account_ID = @id;",
+                    connectie);
+                cmd1.Parameters.AddWithValue("@id", ID);
+                int status = (int)cmd1.ExecuteScalar();
+                if (status == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool ActivateAccount(int ID)
+        {
+            using (SqlConnection connectie = Database.Connection)
+            {
+                SqlCommand cmd1 =
+                    new SqlCommand(
+                        @"update Account set Activated = 1 where Account_ID = @id;",
+                        connectie);
+                cmd1.CommandType = CommandType.Text;
+                cmd1.Connection = connectie;
+                cmd1.Parameters.AddWithValue("@id", ID);
+                cmd1.ExecuteNonQuery();
+                return true;
+            }
+        }
         public int GetaccountId(string username)
         {
+            int accountID; 
             using (SqlConnection connectie = Database.Connection)
             {
                 SqlCommand cmd1 = new SqlCommand(@"SELECT Account_ID FROM Account WHERE Username=@uname;",
                     connectie);
                 cmd1.Parameters.AddWithValue("@uname", username);
-                accountID = (int)cmd1.ExecuteScalar();
-                Console.WriteLine(accountID);
-                connectie.Close();
+                accountID = Convert.ToInt32(cmd1.ExecuteScalar());
                 return accountID;
             }
         }
@@ -56,7 +110,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
             {
                 SqlCommand cmd =
                     new SqlCommand(
-                        @"INSERT INTO[dbo].[Account] ([Username], [Password], [Creation_Date]) VALUES (@username, @password, @date)",
+                        @"INSERT INTO[dbo].[Account] ([Username], [Password], [Creation_Date], [ActivationHash], [Activated]) VALUES (@username, @password, @date, @Activationhash, @Status)",
                         connectie);
 
                 cmd.CommandType = CommandType.Text;
@@ -64,8 +118,10 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                 cmd.Parameters.AddWithValue("@username", account.Username1);
                 cmd.Parameters.AddWithValue("@password", account.Password1);
                 cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                cmd.Parameters.AddWithValue("@Activationhash", account.ActivationHash1);
+                cmd.Parameters.AddWithValue("@Status", account.ActivationStatus1);
                 cmd.ExecuteNonQuery();
-                InsertPerson(account);
+                //InsertPerson(account);
                 return true;
             }
         }

@@ -23,7 +23,7 @@ namespace MyMusicStashWeb.Controllers
         }
 
         // GET: Post/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Reactions(int id)
         {
             List<Reaction> listreaction = reporeaction.GetSpecificReactions(id); 
             return View(listreaction);
@@ -77,17 +77,19 @@ namespace MyMusicStashWeb.Controllers
         // GET: Post/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            //Post post = repopost.
+            return View(post);
         }
 
         // POST: Post/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
+            Post post = new Post(id);
             try
             {
                 // TODO: Add delete logic here
-
+                repopost.DeletePost(post); 
                 return RedirectToAction("Index");
             }
             catch

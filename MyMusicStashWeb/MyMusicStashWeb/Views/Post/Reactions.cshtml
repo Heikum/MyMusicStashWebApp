@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MyMusicStashWeb.Models.Reaction>
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Reactions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -37,7 +37,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ReactionId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ReactionId }) |
+            @Html.ActionLink("Reactions", "Reactions", new { id=item.ReactionId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ReactionId })
         </td>
     </tr>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -25,12 +26,13 @@ namespace MyMusicStashWeb
             set { accountID = value; }
         }
 
+        [DisplayName("Post:")]
         public string Posttext
         {
             get { return posttext; }
             set { posttext = value; }
         }
-
+        [DisplayName("Username:")]
         public string Username1
         {
             get { return Username; }
@@ -43,6 +45,12 @@ namespace MyMusicStashWeb
             this.accountID = accountID;
             this.Username = username;
             this.posttext = posttext;
+        }
+
+        public Post(int postID)
+        {
+            this.postID = postID;
+
         }
         public Post(int accountID, string posttext)
         {

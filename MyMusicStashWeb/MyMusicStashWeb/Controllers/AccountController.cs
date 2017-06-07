@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using MyMusicStashWeb.Database_Acces_Layer;
+using MyMusicStashWeb.Email;
 using MyMusicStashWeb.Interfaces;
 using MyMusicStashWeb.Models;
 
@@ -34,19 +35,53 @@ namespace MyMusicStashWeb.Controllers
         [HttpPost]
         public ActionResult Login(FormCollection collection)
         {
-            Account account = new Account(collection["username"], collection["password"]);
-            Session["Username"] = account.Username1;
-            Session["UserID"] = repo.GetaccountId(account.Username1); 
-            if (repo.Login(account))
-            {
-                return RedirectToAction("Index", "Home");
 
-            }
-            else
+                Account account = new Account(collection["username"], collection["password"]);
+                int ID = repo.GetaccountId(collection["username"]);
+                if (repo.Login(account) == true && repo.CheckActivationStatus(ID) == true)
+                {
+                    Session["Username"] = account.Username1;
+                    Session["UserID"] = repo.GetaccountId(account.Username1);
+                    return RedirectToAction("Index", "Home");
+
+                }
+                else if (repo.Login(account) == true && repo.CheckActivationStatus(ID) == false)
+                {
+                    TempData["NotActivated"] = "NotActivated";
+                    return View();
+                }
+                else
+                {
+                    TempData["Login"] = "Wrong login";
+                    return View();
+                }
+            
+      
+        }
+
+        public ActionResult Activate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Activate(FormCollection collection)
+        {
+            try
             {
-                return View();
+                int accountId = repo.GetaccountId(collection["username"]);
+                if (repo.CheckHash(accountId, collection["activationhash"]))
+                {
+                    TempData["Activated"] = "Activated";
+                }
+                return View(); 
             }
-           
+            catch (Exception)
+            {
+                TempData["Activatedfailed"] = "failed";
+                return View(); 
+                throw;
+            }
         }
         //zorgt voor het uitloggen van de gebruiker door zowel de sessie te clearen als de cookies te verwijderen indien aanwezig
         [AllowAnonymous]
@@ -97,18 +132,20 @@ namespace MyMusicStashWeb.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
+            //berekend age 
             var birthdate = Convert.ToDateTime(collection["birthdate"]);
             var today = DateTime.Now;
             var age = today.Year - birthdate.Year;
+
+            //maakt person en account aan
             Person person = new Person(collection["firstname"], collection["lastname"], Convert.ToDateTime(collection["birthdate"]), age, collection["gender"]);
-            Account account = new Account(collection["username"], collection["password"], collection["Email"], person);
+            Account account = new Account(collection["username"], collection["password"], collection["Email"], person, Email.MD5.CreateMD5(collection["Email"]), 0);
             try
             {
-                // TODO: Add insert logic here
-                repo.Register(account); 
-                //Models.Email mail = new Models.Email("Activeer uw account", "inhoud", "dhrlaaboudi@gmail.com");
-                //EmailLogic.SendEmail(mail);
-                //EmailLogic.SendEmailNew(mail, account.Activatiehash, account.Voornaam);
+                repo.Register(account);
+                repo.InserPerson(account); 
+                Email.Email mail = new Email.Email("Activeer uw account", "inhoud", "dhrlaaboudi@gmail.com");
+                EmailLogic.SendEmailNew(mail, account.ActivationHash1, account.Person.Firstname1);
 
                 return RedirectToAction("Index", "Home");
             }

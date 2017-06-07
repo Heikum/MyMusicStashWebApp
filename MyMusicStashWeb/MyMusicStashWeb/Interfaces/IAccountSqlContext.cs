@@ -14,6 +14,10 @@ namespace MyMusicStashWeb.Interfaces
         bool InsertPerson(Account acount);
         bool EditAccount(Account account);
         Account GetById(int id);
+        bool CheckHash(int ID, string hash);
+        bool ActivateAccount(int ID);
+        bool GetActivationStatus(int ID); 
+
 
     }
 }

@@ -13,12 +13,28 @@ namespace MyMusicStashWeb.Models
         private string Password;
         private int accountId;
         private string Email;
+        private string ActivationHash;
+
+        public int ActivationStatus1
+        {
+            get { return ActivationStatus; }
+            set { ActivationStatus = value; }
+        }
+
+        private int ActivationStatus; 
 
         [DisplayName("Email")]
         public string Email1
         {
             get { return Email; }
             set { Email = value; }
+        }
+
+        [DisplayName("ActivationHash")]
+        public string ActivationHash1
+        {
+            get { return ActivationHash; }
+            set { ActivationHash = value; }
         }
 
         public Person Person
@@ -61,6 +77,16 @@ namespace MyMusicStashWeb.Models
             this.Password = pword;
             this.person = person;
             this.Email = email;
+        }
+
+        public Account(string uname, string pword, string email, Person person, string Activationhash, int activationstatus)
+        {
+            this.Username = uname;
+            this.Password = pword;
+            this.person = person;
+            this.Email = email;
+            this.ActivationHash = Activationhash;
+            this.ActivationStatus = activationstatus; 
         }
 
         public Account(string uname, string pword, int id, string email)

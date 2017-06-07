@@ -52,5 +52,15 @@ namespace MyMusicStashWeb
             return context.DeleteAccount(accountId); 
         }
 
+        public bool CheckHash(int ID, string hash)
+        {
+            return context.CheckHash(ID, hash); 
+        }
+
+        public bool CheckActivationStatus(int ID)
+        {
+            return context.GetActivationStatus(ID); 
+        }
+
     }
 }

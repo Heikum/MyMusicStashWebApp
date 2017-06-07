@@ -156,3 +156,4 @@ C:\Users\Hicham\Source\Repos\KillerApp\MyMusicStashWebApp\MyMusicStashWeb\MyMusi
 C:\Users\Hicham\Source\Repos\KillerApp\MyMusicStashWebApp\MyMusicStashWeb\MyMusicStashWeb\obj\Debug\MyMusicStashWeb.csprojResolveAssemblyReference.cache
 C:\Users\Hicham\Source\Repos\KillerApp\MyMusicStashWebApp\MyMusicStashWeb\MyMusicStashWeb\obj\Debug\MyMusicStashWeb.dll
 C:\Users\Hicham\Source\Repos\KillerApp\MyMusicStashWebApp\MyMusicStashWeb\MyMusicStashWeb\obj\Debug\MyMusicStashWeb.pdb
+C:\Users\Hich\Source\Repos\MyMusicStashWebApp\MyMusicStashWeb\MyMusicStashWeb\bin\favicon.ico
