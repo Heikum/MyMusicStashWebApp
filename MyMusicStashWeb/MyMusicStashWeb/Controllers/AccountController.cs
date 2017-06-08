@@ -132,27 +132,32 @@ namespace MyMusicStashWeb.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            //berekend age 
-            var birthdate = Convert.ToDateTime(collection["birthdate"]);
-            var today = DateTime.Now;
-            var age = today.Year - birthdate.Year;
 
-            //maakt person en account aan
-            Person person = new Person(collection["firstname"], collection["lastname"], Convert.ToDateTime(collection["birthdate"]), age, collection["gender"]);
-            Account account = new Account(collection["username"], collection["password"], collection["Email"], person, Email.MD5.CreateMD5(collection["Email"]), 0);
             try
             {
+                //berekend age 
+                var birthdate = Convert.ToDateTime(collection["birthdate"]);
+                var today = DateTime.Now;
+                var age = today.Year - birthdate.Year;
+                Person person = new Person(collection["firstname"], collection["lastname"],
+                    Convert.ToDateTime(collection["birthdate"]), age, collection["gender"]);
+                Account account = new Account(collection["username"], collection["password"], collection["Email"],
+                    person, Email.MD5.CreateMD5(collection["Email"]), 0);
                 repo.Register(account);
-                repo.InserPerson(account); 
+                repo.InserPerson(account);
                 Email.Email mail = new Email.Email("Activeer uw account", "inhoud", "dhrlaaboudi@gmail.com");
                 EmailLogic.SendEmailNew(mail, account.ActivationHash1, account.Person.Firstname1);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
-            catch
+            catch (FormatException)
             {
-                throw;
-                //return View();
+                TempData["InvalidInput"] = "failed";
+                return View();
+            }
+            catch (Exception)
+            {
+                return View();
             }
         }
     }

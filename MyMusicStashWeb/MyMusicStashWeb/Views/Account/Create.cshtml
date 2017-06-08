@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -15,7 +13,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
                 <form role="form">
-                    <h2>Please Sign Up</h2>
+                    <div class="text-center"><h2>Please Sign Up</h2></div>
                     <hr class="colorgraph">
                     <div class="row">
 
@@ -72,6 +70,7 @@
                                 <input type="checkbox" name="t_and_c" id="t_and_c" class="hidden" value="1">
                             </span>
                         </div>
+
                         <div class="col-xs-8 col-sm-9 col-md-9">
                             By clicking <strong class="label label-primary">Register</strong>, you agree to the <a href="#" data-toggle="modal" data-target="#t_and_c_m">Terms and Conditions</a> set out by this site, including our Cookie Use.
                         </div>
@@ -79,9 +78,16 @@
 
                     <hr class="colorgraph">
                     <div class="row">
-                        <div class="col-xs-12 col-md-6"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+                        <div class="col-xs-12 col-md-6"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7">
+                        </div>
                         @*<div class="col-xs-12 col-md-6"><a href="#" class="btn btn-success btn-block btn-lg">Sign In</a></div>*@
                     </div>
+                    @if (TempData["InvalidInput"] != null)
+                    {
+                        <div class="alert alert-danger alert-autocloseable-danger">
+                            Error: You have entered a wrong birthdate. Please try again. 
+                        </div>
+                    }
                 </form>
             </div>
         </div>

@@ -78,7 +78,7 @@ namespace MyMusicStashWeb.Controllers
         public ActionResult Delete(int id)
         {
             //Post post = repopost.
-            return View(post);
+            return View();
         }
 
         // POST: Post/Delete/5
