@@ -30,6 +30,11 @@ namespace MyMusicStashWeb
             return context.DeletePost(post);
         }
 
+        public Post GetPost(int id)
+        {
+            return context.GetPost(id); 
+        }
+
         public bool EditPost(Post post)
         {
             return context.EditPost(post);

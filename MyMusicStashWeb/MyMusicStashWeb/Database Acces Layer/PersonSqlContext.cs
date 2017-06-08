@@ -59,11 +59,11 @@ namespace MyMusicStashWeb.Database_Acces_Layer
         public Person CreatePersonFromReader(SqlDataReader reader)
         {
             return new Person(
-                Convert.ToString(reader["firstname"]),
-                Convert.ToString(reader["lastname"]),
-                Convert.ToDateTime(reader["birthdatetime"]),
-                Convert.ToInt32(reader["age"]),
-                Convert.ToString(reader["gender"]));
+                Convert.ToString(reader["Name"]),
+                Convert.ToString(reader["Lastname"]),
+                Convert.ToDateTime(reader["Birthdate"]),
+                Convert.ToInt32(reader["Age"]),
+                Convert.ToString(reader["Gender"]));
 
         }
 

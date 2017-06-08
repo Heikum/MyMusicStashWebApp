@@ -104,7 +104,7 @@ namespace MyMusicStashWeb.database_Acces_layer
         {
             using (SqlConnection connectie = Database.Connection)
             {
-                string query = "select * from Post where Post_ID = @id;";
+                string query = "select * from Post p INNER JOIN Account a on a.Account_ID = p.Account_ID where a.Account_ID = @id; ";
                 SqlCommand cmd = new SqlCommand(query, connectie);
                 cmd.Parameters.AddWithValue("@id", postId);
                 cmd.ExecuteNonQuery();

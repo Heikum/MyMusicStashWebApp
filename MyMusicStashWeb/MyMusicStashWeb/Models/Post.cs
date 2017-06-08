@@ -47,6 +47,13 @@ namespace MyMusicStashWeb
             this.posttext = posttext;
         }
 
+        public Post(int postID, int accountID, string posttext)
+        {
+            this.postID = postID;
+            this.accountID = accountID;
+            this.posttext = posttext;
+        }
+
         public Post(int postID)
         {
             this.postID = postID;

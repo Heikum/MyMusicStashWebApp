@@ -53,6 +53,29 @@ namespace MyMusicStashWeb.Controllers
             }
         }
 
+        public ActionResult CreateRandom()
+        {
+            Song song = repo.GiveRandomSong("MP3");
+            return View(song); 
+        }
+        [HttpPost]
+        public ActionResult CreateRandom(FormCollection collection)
+        {
+            Song song = new Song(Convert.ToInt32(Session["UserID"]), collection["MusicType"], collection["MusicName"],
+               collection["ArtistName"], collection["AlbumName"], Convert.ToDateTime(collection["MusicDate"]),
+               collection["MusicSource"], collection["MusicExtension"]);
+            try
+            {
+                // TODO: Add insert logic here
+                repo.AddSong(song);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         // GET: Song/Edit/5
         public ActionResult Edit(int id)
         {

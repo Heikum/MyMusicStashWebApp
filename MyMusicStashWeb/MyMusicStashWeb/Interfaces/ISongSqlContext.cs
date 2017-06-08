@@ -12,6 +12,7 @@ namespace MyMusicStashWeb.Interfaces
         List<Song> GetAllSongsFromUser(int accountId);
         List<Song> GetAllSongs();
         bool DeleteSong(int musicId);
-        Song GetById(int musicId); 
+        Song GetById(int musicId);
+        Song GiveRandomSong(string type);
     }
 }

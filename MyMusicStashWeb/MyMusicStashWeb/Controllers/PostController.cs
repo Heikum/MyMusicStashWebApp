@@ -55,7 +55,8 @@ namespace MyMusicStashWeb.Controllers
         // GET: Post/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Post post = repopost.GetPost(id);
+            return View(post);
         }
 
         // POST: Post/Edit/5
@@ -64,12 +65,14 @@ namespace MyMusicStashWeb.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                Post post = new Post(id, Convert.ToInt32(Session["UserID"]), "wut", collection["Posttext"]);
+                repopost.EditPost(post);
 
                 return RedirectToAction("Index");
             }
             catch
             {
+
                 return View();
             }
         }

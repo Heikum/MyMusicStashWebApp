@@ -25,6 +25,10 @@ namespace MyMusicStashWeb.Repository_s
             return context.AddSong(song);
         }
 
+        public Song GiveRandomSong(string type)
+        {
+            return context.GiveRandomSong(type); 
+        }
         public bool AddNewSongProcedure(Song song)
         {
             return context.AddNewSongProcedure(song); 

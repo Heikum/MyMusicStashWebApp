@@ -1,0 +1,81 @@
+﻿@using MyMusicStashWeb.Models
+@model IEnumerable<MyMusicStashWeb.Models.Media>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Add Image", "CreateImage")
+    @Html.ActionLink("Add Video", "CreateVideo")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MediaDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MediaType)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        if (item is Video)
+        {
+            Video video = (Video)item;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MediaDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MediaType)
+                </td>
+                <td>
+                    <iframe width="560"
+                            height="315"
+                            src="@video.VideoUrl1"
+                            frameborder="0"
+                            allowfullscreen></iframe>
+                </td>
+                <td>
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MediaId })
+                </td>
+            </tr>
+        }
+        if (item is Image)
+        {
+            Image image = (Image)item;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MediaDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MediaType)
+                </td>
+                <td>
+                    <img src="@Url.Content(image.ImageUrl1)" alt="Image" height="200" width="200" />
+                </td>
+                <td>
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MediaId })
+                </td>
+            </tr>
+        }
+    }
+
+
+</table>

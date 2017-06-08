@@ -146,6 +146,27 @@ namespace MyMusicStashWeb.database_Acces_layer
             return null;
         }
 
+        public Song GiveRandomSong(string type)
+        {
+            using (SqlConnection connectie = Database.Connection)
+            {
+                string query = "EXEC RandomSong @Musictype = @type;";
+                SqlCommand cmd = new SqlCommand(query, connectie);
+                cmd.Parameters.AddWithValue("@type", type);
+                cmd.ExecuteNonQuery();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Song song = CreateSongFromReader(reader);
+                        return song;
+                    }
+                }
+            }
+            return null;
+        }
+
         public List<Song> GetAllSongs()
         {
             List<Song> collectie = new List<Song>();

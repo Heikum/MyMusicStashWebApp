@@ -29,15 +29,17 @@
                 @if (Session["Username"] != null)
                 {
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("My Songs", "Index", "Song")</li>
+                    <li>@Html.ActionLink("Songs", "Index", "Song")</li>
                     <li>@Html.ActionLink("Posts", "Index", "Post")</li>
+                    <li>@Html.ActionLink("Media", "Index", "Media")</li>
                     <li>@Html.ActionLink("My Account", "Index", "Account")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li class="navbar-right">@Session["Username"]</li>
+                    <li>@Html.ActionLink("My Details", "Index", "Person")</li>
+                    <ul class="nav navbar-nav navbar-right"><li>@Session["Username"]</li></ul>
                         @*<li class="navbar-right"> <a href="#">@Session["UserID"]</a></li>*@
                     <li><a href='@Url.Action("LogOut", "Account")'>Log Out</a></li>
+                    
                 }
+
                 else
                 {
                     <li class="navbar-brand">@Html.ActionLink("MyMusicStash", "Index", "Home")</li>
@@ -45,8 +47,6 @@
                     <li>@Html.ActionLink("Login", "Login", "Account")</li>
                     <li>@Html.ActionLink("Register", "Create", "Account")</li>
                     <li>@Html.ActionLink("Activate", "Activate", "Account")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 }
             </ul>
         </div>

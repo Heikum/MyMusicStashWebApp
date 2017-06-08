@@ -1,0 +1,48 @@
+﻿@model MyMusicStashWeb.Models.Video
+
+@{
+    ViewBag.Title = "CreateVideo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreateVideo</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Video</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VideoUrl1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VideoUrl1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VideoUrl1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@if ((TempData["WrongInput"]) != null)
+{
+    <div class="text-center">
+        <div class="alert alert-danger alert-autocloseable-danger">
+            Error: You have entered wrong information.
+            Url should be YouTube link. Example:
+            https://www.youtube.com/embed/iM_KMYulI_s
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
