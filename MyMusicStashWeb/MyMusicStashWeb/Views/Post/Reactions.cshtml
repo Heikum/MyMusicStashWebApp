@@ -8,39 +8,42 @@
 <h2>Details</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AccountId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PostId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Post)
-        </th>
-        <th></th>
-    </tr>
+    @Html.ActionLink("Create New", "Create", "Reaction")
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccountId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Post)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ReactionId }) |
-            @Html.ActionLink("Reactions", "Reactions", new { id=item.ReactionId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ReactionId })
-        </td>
-    </tr>
-}
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post)
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Post)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ReactionId }) |
+                    @Html.ActionLink("Reactions", "Reactions", new { id = item.PostId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ReactionId })
+                    @Html.ActionLink("Create New", "Create", "Reaction", new { id = item.ReactionId }))
+                </td>
+            </tr>
+        }
+
+    </table>

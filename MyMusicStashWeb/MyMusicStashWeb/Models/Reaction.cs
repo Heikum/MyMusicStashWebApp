@@ -44,6 +44,14 @@ namespace MyMusicStashWeb.Models
             this.post = post;
         }
 
+
+        public Reaction(int accountID, int postID, string post)
+        {
+            this.accountID = accountID;
+            this.postID = postID;
+            this.post = post;
+        }
+
         public override string ToString()
         {
             return "Account ID: " + Environment.NewLine + accountID + " Post: " + post;

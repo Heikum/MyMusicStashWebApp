@@ -42,6 +42,7 @@ namespace MyMusicStashWeb.Controllers
             }
             catch
             {
+                throw;
                 TempData["WrongInput"] = "Wrong";
                 return View();
             }
@@ -59,13 +60,14 @@ namespace MyMusicStashWeb.Controllers
         {
             try
             {
-                Image image = new Image(collection["VideoUrl1"], 1, Convert.ToInt32(Session["UserID"]), DateTime.Now, "Image");
+                Image image = new Image(collection["ImageUrl1"], 1, Convert.ToInt32(Session["UserID"]), DateTime.Now, "Image");
                 repo.InsertMedia(image);
 
                 return RedirectToAction("Index", "Media");
             }
             catch
             {
+                throw;
                 TempData["WrongInput"] = "Wrong";
                 return View();
             }
@@ -107,7 +109,6 @@ namespace MyMusicStashWeb.Controllers
             try
             {
                 repo.DeleteMedia(id); 
-
                 return RedirectToAction("Index");
             }
             catch

@@ -6,8 +6,11 @@ namespace MyMusicStashWeb.Interfaces
     {
         List<Post> GetAllPosts();
         bool InsertPost(Post post);
-        bool DeletePost(Post post);
+        bool DeletePost(int id);
         bool EditPost(Post post);
         Post GetPost(int postId);
+        int GetAccountPostID(int id);
+
+
     }
 }

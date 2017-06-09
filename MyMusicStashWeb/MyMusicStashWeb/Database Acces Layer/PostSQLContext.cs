@@ -8,6 +8,7 @@ using System.Data;
 using MyMusicStashWeb;
 using MyMusicStashWeb.Database_Acces_Layer;
 using MyMusicStashWeb.Interfaces;
+using MyMusicStashWeb.Models;
 
 namespace MyMusicStashWeb.database_Acces_layer
 {
@@ -104,7 +105,7 @@ namespace MyMusicStashWeb.database_Acces_layer
         {
             using (SqlConnection connectie = Database.Connection)
             {
-                string query = "select * from Post p INNER JOIN Account a on a.Account_ID = p.Account_ID where a.Account_ID = @id; ";
+                string query = "select * from Post p INNER JOIN Account a on a.Account_ID = p.Account_ID where p.Post_ID = @id;";
                 SqlCommand cmd = new SqlCommand(query, connectie);
                 cmd.Parameters.AddWithValue("@id", postId);
                 cmd.ExecuteNonQuery();
@@ -120,16 +121,14 @@ namespace MyMusicStashWeb.database_Acces_layer
             return null;
         }
 
-        public bool DeletePost(Post post)
+        public bool DeletePost(int id)
         {
             using (SqlConnection connection = Database.Connection)
             {
 
-                using (SqlCommand command = new SqlCommand("DeletePost", connection))
+                using (SqlCommand command = new SqlCommand("EXECUTE DeletePost @Post_ID = @id;", connection))
                 {
-                    command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@Post_ID", post.PostId);
-
+                    command.Parameters.AddWithValue("@id", id);
                     try
                     {
                         command.ExecuteNonQuery();
@@ -137,11 +136,31 @@ namespace MyMusicStashWeb.database_Acces_layer
                     }
                     catch (SqlException)
                     {
-
+                        throw;
                     }
                     return false;
                 }
             }
+        }
+
+        public int GetAccountPostID(int id)
+        {
+            using (SqlConnection connectie = Database.Connection)
+            {
+                SqlCommand cmd = new SqlCommand("SELECT Account_ID FROM [Post] WHERE Post_ID = @id;", connectie);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int postid = Convert.ToInt32(reader["Account_ID"]);
+                        return postid;
+                    }
+                }
+            }
+            return 1;
         }
 
 

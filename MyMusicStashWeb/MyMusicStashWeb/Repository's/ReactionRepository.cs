@@ -18,6 +18,11 @@ namespace MyMusicStashWeb
             this.context = context;
         }
 
+        public Reaction GetbyId(int reactionid)
+        {
+            return context.GetById(reactionid); 
+        }
+
         public List<Reaction> GetSpecificReactions(int postId)
         {
             return context.GetSpecificReactions(postId);

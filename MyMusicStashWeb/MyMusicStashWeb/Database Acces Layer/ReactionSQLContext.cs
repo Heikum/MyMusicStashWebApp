@@ -34,6 +34,28 @@ namespace MyMusicStashWeb.database_Acces_layer
             return collectie;
         }
 
+        public Reaction GetById(int reactionId)
+        {
+            using (SqlConnection connectie = Database.Connection)
+            {
+                string query = "select * from Post where Post_ID = @id;";
+                SqlCommand cmd = new SqlCommand(query, connectie);
+                cmd.Parameters.AddWithValue("@id", reactionId);
+                cmd.ExecuteNonQuery();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Reaction reaction = CreateCollectionFromReader(reader);
+                        return reaction;
+                    }
+                }
+            }
+            return null;
+        }
+
+
         public List<Reaction> GetAllReactions()
         {
             List<Reaction> collectie = new List<Reaction>();

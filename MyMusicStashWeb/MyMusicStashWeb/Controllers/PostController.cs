@@ -65,14 +65,22 @@ namespace MyMusicStashWeb.Controllers
         {
             try
             {
-                Post post = new Post(id, Convert.ToInt32(Session["UserID"]), "wut", collection["Posttext"]);
-                repopost.EditPost(post);
+                if (repopost.GetAccountPostID(id) == Convert.ToInt32(Session["UserID"]))
+                {
+                    Post post = new Post(id, Convert.ToInt32(Session["UserID"]), "wut", collection["Posttext"]);
+                    repopost.EditPost(post);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["InvalidRights"] = "failed";
+                    return View();
+                }
             }
             catch
             {
-
+                TempData["InvalidRights"] = "failed";
                 return View();
             }
         }
@@ -80,23 +88,33 @@ namespace MyMusicStashWeb.Controllers
         // GET: Post/Delete/5
         public ActionResult Delete(int id)
         {
-            //Post post = repopost.
-            return View();
+            Post post = repopost.GetPost(id);
+            return View(post);
         }
 
         // POST: Post/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            Post post = new Post(id);
             try
             {
                 // TODO: Add delete logic here
-                repopost.DeletePost(post); 
-                return RedirectToAction("Index");
+                if (repopost.GetAccountPostID(id) == Convert.ToInt32(Session["UserID"]))
+                {
+                    repopost.DeletePost(id);
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["InvalidRights"] = "failed";
+                    return View();
+                }
             }
             catch
             {
+                TempData["InvalidRights"] = "failed";
+                throw;
                 return View();
             }
         }

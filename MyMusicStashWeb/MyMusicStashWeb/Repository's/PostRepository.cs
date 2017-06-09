@@ -25,9 +25,14 @@ namespace MyMusicStashWeb
             return context.InsertPost(post);
         }
 
-        public bool DeletePost(Post post)
+        public int GetAccountPostID(int id)
         {
-            return context.DeletePost(post);
+            return context.GetAccountPostID(id); 
+        }
+
+        public bool DeletePost(int id)
+        {
+            return context.DeletePost(id);
         }
 
         public Post GetPost(int id)

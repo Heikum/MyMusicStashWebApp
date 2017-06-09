@@ -11,6 +11,13 @@
 <div>
     <h4>Song</h4>
     <hr />
+    @if (TempData["NotActivated"] != null)
+    {
+        <div class="alert alert-danger alert-autocloseable-danger">
+            Error: This is not your post.
+        </div>
+    }
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.MusicId)

@@ -149,6 +149,7 @@
     <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\ReactionController.cs" />
     <Compile Include="Controllers\SongController.cs" />
     <Compile Include="Interfaces\IMediaSqlContext.cs" />
     <Compile Include="Database Acces Layer\MediaSqlContext.cs" />
@@ -256,6 +257,7 @@
     <Content Include="Views\Person\Index.cshtml" />
     <Content Include="Views\Post\Edit.cshtml" />
     <Content Include="Views\Song\CreateRandom.cshtml" />
+    <Content Include="Views\Reaction\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

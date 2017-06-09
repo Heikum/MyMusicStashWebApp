@@ -15,19 +15,27 @@ namespace MyMusicStashWeb.Database_Acces_Layer
         {
             using (SqlConnection connection = Database.Connection)
             {
-                SqlCommand cmd = new SqlCommand(@"Insert into Media (Account_ID, Media_Url, Media_date, Media_type) values (@AccountID, @MediaUrl, @MediaDate, @Mediatype);", connection);
-                cmd.Parameters.AddWithValue("@AccountID", image.AccountId);
-                cmd.Parameters.AddWithValue("@MediaUrl", image.ImageUrl1);
-                cmd.Parameters.AddWithValue("@MediaDate", image.MediaDate);
-                cmd.Parameters.AddWithValue("@Mediatype", image.MediaType);
-                var result = (int)cmd.ExecuteScalar();
-                if (result > 0)
+                try
                 {
-                    return true;
+                    SqlCommand cmd = new SqlCommand(@"Insert into Media (Account_ID, Media_Url, Media_date, Media_type) values (@AccountID, @MediaUrl, @MediaDate, @Mediatype);", connection);
+                    cmd.Parameters.AddWithValue("@AccountID", image.AccountId);
+                    cmd.Parameters.AddWithValue("@MediaUrl", image.ImageUrl1);
+                    cmd.Parameters.AddWithValue("@MediaDate", image.MediaDate);
+                    cmd.Parameters.AddWithValue("@Mediatype", image.MediaType);
+                    var result = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return false;
+                    
+                    throw;
                 }
             }
         }
@@ -41,7 +49,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                 cmd.Parameters.AddWithValue("@MediaUrl", video.VideoUrl1);
                 cmd.Parameters.AddWithValue("@MediaDate", video.MediaDate);
                 cmd.Parameters.AddWithValue("@Mediatype", video.MediaType);
-                var result = (int)cmd.ExecuteScalar();
+                var result = Convert.ToInt32(cmd.ExecuteScalar());
                 if (result > 0)
                 {
                     return true;

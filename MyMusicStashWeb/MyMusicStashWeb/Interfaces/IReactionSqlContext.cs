@@ -10,5 +10,6 @@ namespace MyMusicStashWeb.Interfaces
         bool InsertReaction(Reaction reaction);
         bool DeleteReaction(Reaction reaction);
         bool EditReaction(Reaction reaction);
+        Reaction GetById(int reactionId); 
     }
 }

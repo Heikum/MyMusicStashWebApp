@@ -11,6 +11,14 @@
 <div>
     <h4>Post</h4>
     <hr />
+    
+    @if (TempData["InvalidRights"] != null)
+    {
+        <div class="alert alert-danger alert-autocloseable-danger">
+            Error: This is not your post.
+        </div>
+    }
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.AccountId)
