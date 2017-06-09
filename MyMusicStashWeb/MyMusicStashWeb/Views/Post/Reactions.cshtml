@@ -8,8 +8,6 @@
 <h2>Details</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", "Reaction")
-
     </p>
     <table class="table">
         <tr>
@@ -40,8 +38,7 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ReactionId }) |
                     @Html.ActionLink("Reactions", "Reactions", new { id = item.PostId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ReactionId })
-                    @Html.ActionLink("Create New", "Create", "Reaction", new { id = item.ReactionId }))
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ReactionId }) |
                 </td>
             </tr>
         }

@@ -27,6 +27,11 @@ namespace MyMusicStashWeb
             return context.Login(account); 
         }
 
+        public List<Account> GetAllAccounts()
+        {
+            return context.GetAllAccounts(); 
+        }
+
         public int GetaccountId(string username)
         {
             return context.GetaccountId(username); 

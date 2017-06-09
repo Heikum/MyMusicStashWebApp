@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MyMusicStashWeb.Models;
 
 namespace MyMusicStashWeb.Interfaces
@@ -16,7 +17,8 @@ namespace MyMusicStashWeb.Interfaces
         Account GetById(int id);
         bool CheckHash(int ID, string hash);
         bool ActivateAccount(int ID);
-        bool GetActivationStatus(int ID); 
+        bool GetActivationStatus(int ID);
+        List<Account> GetAllAccounts(); 
 
 
     }

@@ -21,6 +21,14 @@ namespace MyMusicStashWeb.Controllers
             return View(account);
         }
 
+        public ActionResult IndexAllAccounts()
+        {
+            List<Account> accounts = new List<Account>();
+            accounts = repo.GetAllAccounts();
+            return View(accounts);
+        }
+
+
         public ActionResult Login()
         {
             return View();
@@ -40,6 +48,12 @@ namespace MyMusicStashWeb.Controllers
                 int ID = repo.GetaccountId(collection["username"]);
                 if (repo.Login(account) == true && repo.CheckActivationStatus(ID) == true)
                 {
+                    Session["Username"] = account.Username1;
+                    if (Convert.ToString(Session["Username"]) == "Admin")
+                    {
+                    Session["Admin"] = "True";
+                    }
+
                     Session["Username"] = account.Username1;
                     Session["UserID"] = repo.GetaccountId(account.Username1);
                     return RedirectToAction("Index", "Home");
@@ -64,6 +78,7 @@ namespace MyMusicStashWeb.Controllers
             return View();
         }
 
+
         [HttpPost]
         public ActionResult Activate(FormCollection collection)
         {
@@ -81,6 +96,25 @@ namespace MyMusicStashWeb.Controllers
                 TempData["Activatedfailed"] = "failed";
                 return View(); 
                 throw;
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            Account account = repo.GetById(id);
+            return View(account);
+        }
+
+        public ActionResult Delete(int id, FormCollection Collection)
+        {
+            try
+            {
+                repo.DeleteAccount(id);
+                return RedirectToAction("IndexAllAccounts", "Account");
+            }
+            catch (Exception)
+            {
+                return View();
             }
         }
         //zorgt voor het uitloggen van de gebruiker door zowel de sessie te clearen als de cookies te verwijderen indien aanwezig

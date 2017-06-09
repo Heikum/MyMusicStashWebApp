@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MyMusicStashWeb.Models.Account>
+
+@{
+    ViewBag.Title = "IndexAllAccounts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>IndexAllAccounts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Email1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActivationStatus1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActivationHash1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AccountId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AccountId }) |
+        </td>
+    </tr>
+}
+
+</table>

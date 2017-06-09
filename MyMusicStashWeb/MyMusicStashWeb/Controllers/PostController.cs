@@ -118,5 +118,28 @@ namespace MyMusicStashWeb.Controllers
                 return View();
             }
         }
+
+        public ActionResult CreateReaction()
+        {
+            return View();
+        }
+
+        // POST: Reaction/Create
+        [HttpPost]
+        public ActionResult CreateReaction(int id, FormCollection collection)
+        {
+            try
+            {
+                Reaction reaction = new Reaction(Convert.ToInt32(Session["UserID"]), id, collection["Post"]);
+                reporeaction.InsertReaction(reaction);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                throw;
+                return View();
+            }
+        }
+
     }
 }

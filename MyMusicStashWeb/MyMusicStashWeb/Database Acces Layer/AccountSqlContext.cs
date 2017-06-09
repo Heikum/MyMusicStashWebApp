@@ -55,7 +55,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                 }
             } 
         }
-
+        // Geeft de activatiestatus weer
         public bool GetActivationStatus(int ID)
         {
             using (SqlConnection connectie = Database.Connection)
@@ -74,7 +74,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                 }
             }
         }
-
+        // Activeert een account door de status op 1 te zetten 
         public bool ActivateAccount(int ID)
         {
             using (SqlConnection connectie = Database.Connection)
@@ -90,6 +90,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                 return true;
             }
         }
+
         public int GetaccountId(string username)
         {
             int accountID; 
@@ -103,7 +104,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
             }
         }
 
-
+        //Registreert een gebruiker
         public bool Register(Account account)
         {
             using (SqlConnection connectie = Database.Connection)
@@ -126,6 +127,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
             }
         }
 
+        //Voert een persoon d.m.v. een sql query in in de database
         public bool InsertPerson(Account account)
         {
             using (SqlConnection connectie = Database.Connection)
@@ -148,7 +150,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                 return true;
             }
         }
-
+        //Returned een account klassen door een id in te voeren
         public Account GetById(int id)
         {
             using (SqlConnection connectie = Database.Connection)
@@ -170,6 +172,26 @@ namespace MyMusicStashWeb.Database_Acces_Layer
             return null;
         }
 
+        //Returned alle accounts in de database als een list
+        public List<Account> GetAllAccounts()
+        {
+            List<Account> collectie = new List<Account>();
+            using (SqlConnection connectie = Database.Connection)
+            {
+                SqlCommand cmd = new SqlCommand("select Username, Password, Account_ID, Email from Account;", connectie);
+                cmd.ExecuteNonQuery();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        collectie.Add(CreateAccountFromReader(reader));
+                    }
+                }
+            }
+            return collectie;
+        }
+        //Edit een bestaand account in de database door nieuwe gegevens in te voeren
         public bool EditAccount(Account account)
         {
             using (SqlConnection connectie = Database.Connection)
@@ -188,7 +210,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
             }
         }
 
-
+        //Delete een bestaand account uit de sql database
         public bool DeleteAccount(int accountId)
         {
             using (SqlConnection connectie = Database.Connection)
@@ -197,6 +219,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
             }
         }
 
+        //Maakt account aan vanuit de sqldatareader en returned een account
         public Account CreateAccountFromReader(SqlDataReader reader)
         {
             return new Account(

@@ -10,5 +10,6 @@ namespace MyMusicStashWeb.Database_Acces_Layer
         Media Getmedia(int mediaId);
         bool DeleteMedia(int mediaId);
         List<Media> GetAllMedia();
+        int GetAccountMediaID(int id); 
     }
 }

@@ -16,6 +16,11 @@ namespace MyMusicStashWeb
             this.context = context;
         }
 
+        public int GetAccountMediaID(int id)
+        {
+            return context.GetAccountMediaID(id); 
+        }
+
         public bool InsertMedia(Image image)
         {
             return context.InsertMedia(image); 

@@ -108,11 +108,21 @@ namespace MyMusicStashWeb.Controllers
         {
             try
             {
-                repo.DeleteMedia(id); 
-                return RedirectToAction("Index");
+                if (repo.GetAccountMediaID(id) == Convert.ToInt32(Session["UserID"]))
+                {
+                    repo.DeleteMedia(id);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["InvalidRights"] = "failed";
+                    return View();
+                }
+
             }
             catch
             {
+                throw; 
                 return View();
             }
         }

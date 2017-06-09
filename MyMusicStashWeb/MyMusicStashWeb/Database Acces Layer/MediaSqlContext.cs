@@ -40,6 +40,26 @@ namespace MyMusicStashWeb.Database_Acces_Layer
             }
         }
 
+        public int GetAccountMediaID(int id)
+        {
+            using (SqlConnection connectie = Database.Connection)
+            {
+                SqlCommand cmd = new SqlCommand("SELECT Account_ID FROM [Music_collection] WHERE Music_ID = @id;", connectie);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int accountid = Convert.ToInt32(reader["Account_ID"]);
+                        return accountid;
+                    }
+                }
+            }
+            return 1;
+        }
+
         public bool InsertMedia(Video video)
         {
             using (SqlConnection connection = Database.Connection)

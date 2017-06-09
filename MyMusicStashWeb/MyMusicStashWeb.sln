@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMusicStashWeb", "MyMusicStashWeb\MyMusicStashWeb.csproj", "{8865D33C-16FA-4080-8139-8F37172AFF2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProjectMyMusicStash", "UnitTestProjectMyMusicStash\UnitTestProjectMyMusicStash.csproj", "{44CABF8A-E4AC-41A7-AD4D-5749B53989DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8865D33C-16FA-4080-8139-8F37172AFF2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8865D33C-16FA-4080-8139-8F37172AFF2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8865D33C-16FA-4080-8139-8F37172AFF2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44CABF8A-E4AC-41A7-AD4D-5749B53989DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44CABF8A-E4AC-41A7-AD4D-5749B53989DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44CABF8A-E4AC-41A7-AD4D-5749B53989DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44CABF8A-E4AC-41A7-AD4D-5749B53989DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
