@@ -11,7 +11,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
 {
     public class PersonSqlContext : IPersonSqlContext
     {
-
+        //Returned persoonlijke details na ingeven persoon ID
         public Person GetPersonDetails(int id)
         {
             using (SqlConnection connectie = Database.Connection)
@@ -32,7 +32,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
             return null;
         }
 
-
+        // Update details van een persoon in de database. 
         public bool UpdateDetails(int id, Person person)
         {
             using (SqlConnection connectie = Database.Connection)
@@ -55,7 +55,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
         }
 
 
-
+        // Maakt een persoon aan via de sqldatareader en returned deze
         public Person CreatePersonFromReader(SqlDataReader reader)
         {
             return new Person(

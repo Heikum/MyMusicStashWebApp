@@ -11,6 +11,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
     public class MediaSqlContext : IMediaSqlContext
     {
 
+        //Insert media (image) in de database
         public bool InsertMedia(Image image)
         {
             using (SqlConnection connection = Database.Connection)
@@ -39,7 +40,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                 }
             }
         }
-
+        //Returned een int met de accountID gebaseerd op de ingegeven media ID
         public int GetAccountMediaID(int id)
         {
             using (SqlConnection connectie = Database.Connection)
@@ -59,7 +60,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
             }
             return 1;
         }
-
+        //Insert media (video) in de database
         public bool InsertMedia(Video video)
         {
             using (SqlConnection connection = Database.Connection)
@@ -80,7 +81,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                 }
             }
         }
-
+        // Returned een media uit de database na ingeven mediaID 
         public Media Getmedia(int mediaId)
         {
             using (SqlConnection connectie = Database.Connection)
@@ -100,7 +101,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
             }
             return null; 
         }
-
+        // Creert een image of een video, gebaseerd op de input van het media type
         private Media CreateCollectionFromReader(SqlDataReader reader)
         {
             if (Convert.ToString(reader["Media_Type"]) == "Video")
@@ -125,7 +126,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                 return null;
             }
         }
-
+        // Delete media uit de database
         public bool DeleteMedia(int mediaId)
         {
             using (SqlConnection connection = Database.Connection)
@@ -147,7 +148,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
                 }
             }
         }
-
+        // Returned alle media in een list uit de database
         public List<Media> GetAllMedia()
         {
             List<Media> collectie = new List<Media>();

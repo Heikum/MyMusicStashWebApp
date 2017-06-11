@@ -21,6 +21,7 @@ namespace UnitTestProjectMyMusicStash.Tests
             Account[] accountlijst = accountlist.ToArray();
             Assert.AreEqual("Heikum", accountlijst[0].Username1);
             Assert.AreEqual("123", accountlijst[0].Password1);
+            Assert.AreNotEqual(4, accountlijst[0].AccountId);
         }
 
 

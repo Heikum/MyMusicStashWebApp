@@ -78,6 +78,18 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PostcodeAPI.NET, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\postcodeapi.net.1.1.0\lib\net45\PostcodeAPI.NET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -140,14 +152,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\PostcodeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\SongController.cs" />
     <Compile Include="Interfaces\IMediaSqlContext.cs" />
@@ -179,6 +187,8 @@
     <Compile Include="Models\Post.cs" />
     <Compile Include="Database Acces Layer\PostSqlContext.cs" />
     <Compile Include="Models\Video.cs" />
+    <Compile Include="PostcodeApi\Adresgegevens.cs" />
+    <Compile Include="PostcodeApi\Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Reaction.cs" />
     <Compile Include="Database Acces Layer\ReactionSqlContext.cs" />
@@ -259,6 +269,7 @@
     <Content Include="Views\Song\CreateRandom.cshtml" />
     <Content Include="Views\Post\CreateReaction.cshtml" />
     <Content Include="Views\Account\IndexAllAccounts.cshtml" />
+    <Content Include="Views\Postcode\GetAdress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

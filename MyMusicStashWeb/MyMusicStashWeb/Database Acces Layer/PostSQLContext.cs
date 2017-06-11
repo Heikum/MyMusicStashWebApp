@@ -14,6 +14,7 @@ namespace MyMusicStashWeb.database_Acces_layer
 {
     class PostsqlContext : IPostSqlContext
     {
+        // Geeft alle posts uit de database in een list terug, inner join om username erbij te krijgen
         public List<Post> GetAllPosts()
         {
             List<Post> collectie = new List<Post>();
@@ -32,7 +33,7 @@ namespace MyMusicStashWeb.database_Acces_layer
             }
             return collectie;
         }
-
+        //Returned alle posts van een specifieke gebruiker 
         public List<Post> GetSpecificPosts(int accountId)
         {
             List<Post> collectie = new List<Post>();

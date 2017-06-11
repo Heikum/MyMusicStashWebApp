@@ -13,6 +13,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
     {
         public int accountID { get; set; }
 
+        //Laat gebruiker ingloggen als de username en password voorkomen in de database
         public bool Login(Account account)
         {
             using (SqlConnection connection = Database.Connection)
@@ -36,6 +37,7 @@ namespace MyMusicStashWeb.Database_Acces_Layer
 
         }
 
+        //Checkt activatiehash in de database of deze gelijk is aan de input, returned true of false
         public bool CheckHash(int ID, string hash)
         {
             using (SqlConnection connectie = Database.Connection)
